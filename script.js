@@ -86,29 +86,28 @@ cards.forEach(card => {
 });
 
 /* ===== HAMBURGER MENU TOGGLE (MOBILE ONLY) ===== */
-/* ===== PREMIUM HAMBURGER MENU (ANIMATED) ===== */
+/* ===== ANIMATED HAMBURGER + MENU TOGGLE ===== */
 const hamburger = document.getElementById("hamburger");
 const navMenu = document.getElementById("navMenu");
 
 if (hamburger && navMenu) {
   hamburger.addEventListener("click", () => {
+    // Toggle menu
     navMenu.classList.toggle("active");
-    hamburger.classList.toggle("active");
 
-    // Accessibility (professional touch)
-    const expanded = hamburger.getAttribute("aria-expanded") === "true";
-    hamburger.setAttribute("aria-expanded", !expanded);
+    // Animate hamburger (☰ → ✖)
+    hamburger.classList.toggle("active");
   });
 
-  // Auto close menu when clicking links (mobile UX)
+  // Auto close menu when clicking a link (mobile UX)
   const navLinks = document.querySelectorAll("#navMenu a");
 
   navLinks.forEach(link => {
     link.addEventListener("click", () => {
       navMenu.classList.remove("active");
-      hamburger.classList.remove("active");
-      hamburger.setAttribute("aria-expanded", "false");
+      hamburger.classList.remove("active"); // revert X → ☰
     });
   });
 }
+
 

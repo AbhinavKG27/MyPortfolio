@@ -754,3 +754,131 @@ body.light #navMenu.active {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
+/* ===== FINAL HEADER ALIGNMENT FIX ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px;
+}
+
+/* Logo left */
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+/* Right side container (IMPORTANT) */
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Fix theme button position */
+.theme-btn {
+  margin: 0; /* removes auto centering issue */
+  position: static; /* prevents weird middle positioning */
+}
+
+/* Desktop nav */
+#navMenu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Hide hamburger on desktop */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===== MOBILE LAYOUT ===== */
+@media (max-width: 768px) {
+
+  /* Hide desktop nav */
+  #navMenu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px 0;
+    background: var(--card);
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
+  }
+
+  #navMenu.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Show hamburger only on mobile */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+/* ===== HAMBURGER BASE ===== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 1100;
+}
+
+/* Hamburger lines */
+.hamburger span {
+  width: 26px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: all 0.35s ease;
+  transform-origin: center;
+}
+
+/* ===== ANIMATION: ☰ → ✖ ===== */
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+/* Desktop: hide hamburger */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+/* Mobile: show hamburger */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+.hamburger:hover span {
+  box-shadow: 0 0 8px var(--accent);
+}
