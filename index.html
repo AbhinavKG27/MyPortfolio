@@ -14,26 +14,51 @@
 
 <body>
 
-<header>
-  <h1>MyPortfolio</h1>
-  <nav>
+
+
+
+<header class="header">
+
+  <!-- LEFT: Logo -->
+  <h1 class="logo">MyPortfolio</h1>
+
+  <!-- RIGHT SIDE CONTROLS -->
+  <div class="header-controls">
+
+    <!-- Theme Toggle (ALWAYS OUTSIDE MENU) -->
+    <button id="themeToggle" class="theme-btn">🌙</button>
+
+    <!-- Hamburger (Mobile Only) -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- Navigation Menu -->
+  <nav id="navMenu">
     <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
     <a href="#gallery">Gallery</a>
     <a href="#contact">Contact</a>
-    <button id="themeToggle" class="theme-btn">🌙</button>
   </nav>
+
 </header>
+
+
 
 <section class="hero">
 
   <div class="hero-premium">
-    <div class="bg-title">HI I'M</div>
-
+    
     <div class="profile-stack">
       <div class="profile-image">
         <img src="assets/MyPhoto.jpg" alt="Profile" />
       </div>
-      <h1 class="profile-name">Abhinav</h1>
+      
     </div>
   </div>
 
@@ -153,7 +178,7 @@
 
 <section id="gallery" class="gallery">
   <div class="section-header">
-    <h2>Gallery / Inspirations</h2>
+    <h2>Gallery</h2>
     <span class="section-line"></span>
   </div>
 
@@ -179,12 +204,38 @@
   <h2>Let’s Work Together</h2>
   <p>I’m open to internships, full-time roles, and collaborative projects.</p>
 
-  <div class="footer-actions" >
-    <a href="https://github.com/AbhinavKG27" target="_blank" class="footer-btn"><i class="fab fa-github"></i>GitHub</a>
-    <a href="assets/AbhinavResume.pdf" download class="footer-btn"><i class="fas fa-file-download"></i>Resume</a>
-    <a href="mailto:abhinavkg2004@gmail.com" class="footer-btn"><i class="fas fa-envelope"></i>Contact</a>
-    <a href="https://www.linkedin.com/in/abhinavkg2004" target="_blank" class="footer-btn"><i class="fab fa-linkedin-in"></i>LinkedIn</a>
-    <a href="tel:+919380263659" class="footer-btn"><i class="fas fa-phone"></i>Phone No.</a>
+  <div class="footer-actions">
+    
+    <a href="https://github.com/AbhinavKG27" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="footer-btn">
+       <i class="fab fa-github"></i>GitHub
+    </a>
+
+    <a href="assets/AbhinavResume.pdf" 
+       download 
+       class="footer-btn">
+       <i class="fas fa-file-download"></i>Resume
+    </a>
+
+    <a href="mailto:abhinavkg2004@gmail.com" 
+       class="footer-btn">
+       <i class="fas fa-envelope"></i>Contact
+    </a>
+
+    <a href="https://www.linkedin.com/in/abhinavkg2004" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="footer-btn">
+       <i class="fab fa-linkedin-in"></i>LinkedIn
+    </a>
+
+    <a href="tel:+919380263659" 
+       class="footer-btn">
+       <i class="fas fa-phone"></i>Phone No.
+    </a>
+
   </div>
 
   <div class="footer-bottom">

@@ -1,26 +1,42 @@
 function openLightbox(src) {
-  document.getElementById("lightbox").style.display = "flex";
-  document.getElementById("lightboxImg").src = src;
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+
+  if (lightbox && lightboxImg) {
+    lightbox.style.display = "flex";
+    lightboxImg.src = src;
+  }
 }
+
 function closeLightbox() {
-  document.getElementById("lightbox").style.display = "none";
+  const lightbox = document.getElementById("lightbox");
+  if (lightbox) {
+    lightbox.style.display = "none";
+  }
 }
 
 function scrollToContact() {
-  document.getElementById("contact").scrollIntoView({
-    behavior: "smooth"
+  const contact = document.getElementById("contact");
+  if (contact) {
+    contact.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+}
+
+/* ===== THEME TOGGLE (SAFE) ===== */
+const toggleBtn = document.getElementById("themeToggle");
+
+if (toggleBtn) {
+  toggleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+
+    toggleBtn.textContent =
+      document.body.classList.contains("light") ? "🌞" : "🌙";
   });
 }
 
-const toggleBtn = document.getElementById("themeToggle");
-
-toggleBtn.addEventListener("click", () => {
-  document.body.classList.toggle("light");
-
-  toggleBtn.textContent =
-    document.body.classList.contains("light") ? "🌞" : "🌙";
-});
-
+/* ===== SCROLL REVEAL ANIMATION ===== */
 const reveals = document.querySelectorAll(".reveal");
 
 function revealOnScroll() {
@@ -37,19 +53,20 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 revealOnScroll();
 
+/* ===== 3D CARD HOVER EFFECT (FIXED) ===== */
 const cards = document.querySelectorAll(".project-card");
 
 cards.forEach(card => {
   card.addEventListener("mousemove", e => {
     const rect = card.getBoundingClientRect();
 
-    const x = e.clientX - rect.left; 
-    const y = e.clientY - rect.top; 
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -16; 
+    const rotateX = ((y - centerY) / centerY) * -16;
     const rotateY = ((x - centerX) / centerX) * 16;
 
     card.style.transform = `
@@ -67,8 +84,31 @@ cards.forEach(card => {
     `;
   });
 });
-card.addEventListener("mousemove", e => {
-  const rect = card.getBoundingClientRect();
-  card.style.setProperty("--x", `${e.clientX - rect.left}px`);
-  card.style.setProperty("--y", `${e.clientY - rect.top}px`);
-});
+
+/* ===== HAMBURGER MENU TOGGLE (MOBILE ONLY) ===== */
+/* ===== PREMIUM HAMBURGER MENU (ANIMATED) ===== */
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+if (hamburger && navMenu) {
+  hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+    hamburger.classList.toggle("active");
+
+    // Accessibility (professional touch)
+    const expanded = hamburger.getAttribute("aria-expanded") === "true";
+    hamburger.setAttribute("aria-expanded", !expanded);
+  });
+
+  // Auto close menu when clicking links (mobile UX)
+  const navLinks = document.querySelectorAll("#navMenu a");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("active");
+      hamburger.classList.remove("active");
+      hamburger.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
