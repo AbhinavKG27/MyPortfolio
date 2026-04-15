@@ -439,6 +439,21 @@ body.light .footer-glow {
   background: radial-gradient(circle, rgba(37, 99, 235, 0.15), transparent 70%);
 }
 
+body.light .footer-btn {
+  color: var(--text);
+  background: rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+}
+
+body.light .footer-btn i {
+  color: var(--accent);
+}
+
+body.light .footer-btn:hover {
+  background: rgba(37, 99, 235, 0.14);
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
 /* ===== KEYFRAMES ===== */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
