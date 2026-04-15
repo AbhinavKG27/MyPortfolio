@@ -2,10 +2,14 @@ function openLightbox(src) {
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightboxImg");
 
-  if (lightbox && lightboxImg) {
-    lightbox.style.display = "flex";
-    lightboxImg.src = src;
-  }
+  if (!lightbox || !lightboxImg) return;
+
+  const galleryImages = Array.from(document.querySelectorAll("#gallery .gallery-grid img"));
+  const currentIndex = galleryImages.findIndex(img => img.src === src);
+
+  lightbox.dataset.index = String(currentIndex >= 0 ? currentIndex : 0);
+  lightbox.style.display = "flex";
+  lightboxImg.src = src;
 }
 
 function closeLightbox() {
@@ -24,36 +28,58 @@ function scrollToContact() {
   }
 }
 
-/* ===== THEME TOGGLE (SAFE) ===== */
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+}
+
+/* ===== THEME TOGGLE ===== */
 const toggleBtn = document.getElementById("themeToggle");
 
 if (toggleBtn) {
   toggleBtn.addEventListener("click", () => {
     document.body.classList.toggle("light");
-
-    toggleBtn.textContent =
-      document.body.classList.contains("light") ? "🌞" : "🌙";
+    toggleBtn.textContent = document.body.classList.contains("light") ? "🌞" : "🌙";
   });
 }
 
-/* ===== SCROLL REVEAL ANIMATION ===== */
+/* ===== SCROLL REVEAL (INTERSECTION OBSERVER + FALLBACK) ===== */
 const reveals = document.querySelectorAll(".reveal");
 
-function revealOnScroll() {
-  reveals.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
 
-    if (top < windowHeight - 100) {
-      el.classList.add("active");
-    }
-  });
+  reveals.forEach(el => revealObserver.observe(el));
+} else {
+  function revealOnScroll() {
+    reveals.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < window.innerHeight - 100) {
+        el.classList.add("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", revealOnScroll, { passive: true });
+  revealOnScroll();
 }
 
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
-
-/* ===== 3D CARD HOVER EFFECT (FIXED) ===== */
+/* ===== 3D CARD HOVER EFFECT (UNCHANGED TRANSITION) ===== */
 const cards = document.querySelectorAll(".project-card");
 
 cards.forEach(card => {
@@ -74,6 +100,9 @@ cards.forEach(card => {
       rotateY(${rotateY}deg)
       scale(1.03)
     `;
+
+    card.style.setProperty("--mx", `${(x / rect.width) * 100}%`);
+    card.style.setProperty("--my", `${(y / rect.height) * 100}%`);
   });
 
   card.addEventListener("mouseleave", () => {
@@ -82,32 +111,51 @@ cards.forEach(card => {
       rotateY(0deg)
       scale(1)
     `;
+    card.style.setProperty("--mx", "50%");
+    card.style.setProperty("--my", "0%");
   });
 });
 
-/* ===== HAMBURGER MENU TOGGLE (MOBILE ONLY) ===== */
+/* ===== LIGHTBOX ENHANCEMENTS (KEYBOARD + PREV/NEXT) ===== */
+function navigateLightbox(direction) {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const galleryImages = Array.from(document.querySelectorAll("#gallery .gallery-grid img"));
+
+  if (!lightbox || !lightboxImg || !galleryImages.length || lightbox.style.display !== "flex") return;
+
+  const currentIndex = Number(lightbox.dataset.index || 0);
+  const nextIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+
+  lightbox.dataset.index = String(nextIndex);
+  lightboxImg.src = galleryImages[nextIndex].src;
+}
+
+window.addEventListener("keydown", e => {
+  const lightbox = document.getElementById("lightbox");
+  if (!lightbox || lightbox.style.display !== "flex") return;
+
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowRight") navigateLightbox(1);
+  if (e.key === "ArrowLeft") navigateLightbox(-1);
+});
+
 /* ===== ANIMATED HAMBURGER + MENU TOGGLE ===== */
 const hamburger = document.getElementById("hamburger");
 const navMenu = document.getElementById("navMenu");
 
 if (hamburger && navMenu) {
   hamburger.addEventListener("click", () => {
-    // Toggle menu
     navMenu.classList.toggle("active");
-
-    // Animate hamburger (☰ → ✖)
     hamburger.classList.toggle("active");
   });
 
-  // Auto close menu when clicking a link (mobile UX)
   const navLinks = document.querySelectorAll("#navMenu a");
 
   navLinks.forEach(link => {
     link.addEventListener("click", () => {
       navMenu.classList.remove("active");
-      hamburger.classList.remove("active"); // revert X → ☰
+      hamburger.classList.remove("active");
     });
   });
 }
-
-

@@ -64,9 +64,14 @@
   </div>
 
   <div class="hero-text">
+    <!-- MODIFIED: Stronger hero messaging + additional CTA buttons -->
     <h2>Hello, I'm <span>Abhinav K G</span></h2>
-    <p>Engineering ideas into clean, interactive experiences.</p>
-    <button onclick="scrollToContact()">Contact Me</button>
+    <p>I build scalable software and polished web experiences that turn complex ideas into reliable products.</p>
+    <div class="hero-actions">
+      <button onclick="scrollToContact()">Contact Me</button>
+      <button class="hero-secondary" onclick="scrollToSection('projects')">View Projects</button>
+      <a class="hero-download" href="assets/AbhinavResume.pdf" download>Download Resume</a>
+    </div>
   </div>
 
 </section>
@@ -114,6 +119,10 @@
         <li>Fully offline execution</li>
       </ul>
       <span class="tech">Python · Tkinter · Automation</span>
+      <div class="project-actions">
+        <a href="https://github.com/AbhinavKG27" target="_blank" rel="noopener noreferrer" class="project-btn"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#contact" class="project-btn project-btn-live">Live Demo</a>
+      </div>
     </div>
 
     <div class="project-card">
@@ -129,6 +138,10 @@
         <li>Agile development</li>
       </ul>
       <span class="tech">React · Node.js · MongoDB</span>
+      <div class="project-actions">
+        <a href="https://github.com/AbhinavKG27" target="_blank" rel="noopener noreferrer" class="project-btn"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#contact" class="project-btn project-btn-live">Live Demo</a>
+      </div>
     </div>
 
     <div class="project-card">
@@ -144,6 +157,10 @@
         <li>Team collaboration</li>
       </ul>
       <span class="tech">Node.js · MongoDB · Agile</span>
+      <div class="project-actions">
+        <a href="https://github.com/AbhinavKG27" target="_blank" rel="noopener noreferrer" class="project-btn"><i class="fab fa-github"></i> GitHub</a>
+        <a href="#contact" class="project-btn project-btn-live">Live Demo</a>
+      </div>
     </div>
 
   </div>
@@ -156,11 +173,11 @@
   </div>
 
   <div class="skill-grid">
-    <div class="project-card"><h4>Programming</h4><p>C, C++, Java, Python (Basics), JavaScript</p></div>
-    <div class="project-card"><h4>Web Technologies</h4><p>HTML, CSS, React, Node.js, Express</p></div>
-    <div class="project-card"><h4>Databases</h4><p>SQL, MongoDB</p></div>
-    <div class="project-card"><h4>Concepts</h4><p>DSA, OOPS, SDLC, Agile, Cloud Basics</p></div>
-    <div class="project-card"><h4>Tools</h4><p>Git, GitHub, VS Code</p></div>
+    <div class="project-card"><h4><i class="fas fa-code"></i> Programming</h4><p>C, C++, Java, Python (Basics), JavaScript</p></div>
+    <div class="project-card"><h4><i class="fas fa-globe"></i> Web Technologies</h4><p>HTML, CSS, React, Node.js, Express</p></div>
+    <div class="project-card"><h4><i class="fas fa-database"></i> Databases</h4><p>SQL, MongoDB</p></div>
+    <div class="project-card"><h4><i class="fas fa-lightbulb"></i> Concepts</h4><p>DSA, OOPS, SDLC, Agile, Cloud Basics</p></div>
+    <div class="project-card"><h4><i class="fas fa-screwdriver-wrench"></i> Tools</h4><p>Git, GitHub, VS Code</p></div>
   </div>
 </section>
 
@@ -184,11 +201,13 @@
   </div>
 
   <div class="gallery-grid">
-    <img class="reveal" src="assets\WhatsApp Image 2026-01-03 at 08.44.51.jpeg" onclick="openLightbox(this.src)" />
-    <img class="reveal" src="assets\IMG20231114123955.jpg" onclick="openLightbox(this.src)" />
-    <img class="reveal" src="assets\20231113_164458.jpg" onclick="openLightbox(this.src)" />
-    <img class="reveal" src="assets\IMG20231113183232.jpg" onclick="openLightbox(this.src)" />
-    
+    <!-- MODIFIED: Gallery expanded to 6 images + lazy loading preserved lightbox -->
+    <img class="reveal" loading="lazy" src="assets/WhatsApp Image 2026-01-03 at 08.44.51.jpeg" alt="Gallery moment 1" onclick="openLightbox(this.src)" />
+    <img class="reveal" loading="lazy" src="assets/IMG20231114123955.jpg" alt="Gallery moment 2" onclick="openLightbox(this.src)" />
+    <img class="reveal" loading="lazy" src="assets/20231113_164458.jpg" alt="Gallery moment 3" onclick="openLightbox(this.src)" />
+    <img class="reveal" loading="lazy" src="assets/IMG20231113183232.jpg" alt="Gallery moment 4" onclick="openLightbox(this.src)" />
+    <img class="reveal" loading="lazy" src="assets/MyPhoto.jpg" alt="Gallery portrait" onclick="openLightbox(this.src)" />
+    <img class="reveal" loading="lazy" src="assets/IMG20231114123955.jpg" alt="Gallery moment 5" onclick="openLightbox(this.src)" />
   </div>
 </section>
 
